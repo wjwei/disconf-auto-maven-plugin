@@ -92,7 +92,7 @@ public class DisconfAutoOperator {
         //检查是否已经存在配置
         r = disconfOperator.checkExistConfig(disconfInfo);
         if(r){
-            log.warn("%s %s %s版本已经存在部分配置", disconfInfo.getApp(), disconfInfo.getEnv(), disconfInfo.getVersion());
+            log.warn(String.format("%s %s %s版本已经存在部分配置", disconfInfo.getApp(), disconfInfo.getEnv(), disconfInfo.getVersion()));
         }
 
         //上传watch配置项
