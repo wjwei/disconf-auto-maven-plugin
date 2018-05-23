@@ -469,7 +469,7 @@ public class DisconfOperator {
         List<Integer> list = new ArrayList<>();
         Map<Integer, String> versionMap = new HashMap<>();
         //版本号转数字
-        if(versionList.size() <= 0){
+        if(versionList.size() > 0){
             for(String version : versionList){
 
                 Integer v = Integer.valueOf(version.replaceAll("_", ""));
@@ -493,11 +493,13 @@ public class DisconfOperator {
         log.info("version list:" + list);
 
         if(list.size() > 5){
-            for(int i = 5; i < list.size(); i++){
+            int endIndex = list.size() - 5;
+            for(int i = 0; i < endIndex; i++){
                 Integer v = list.get(i);
                 String version = versionMap.get(v);
 
                 DisconfInfo info = new DisconfInfo();
+                info.setDisconfHostUrl(disconfInfo.getDisconfHostUrl());
                 info.setAppId(disconfInfo.getAppId());
                 info.setEnvId(disconfInfo.getEnvId());
                 info.setVersion(version);
