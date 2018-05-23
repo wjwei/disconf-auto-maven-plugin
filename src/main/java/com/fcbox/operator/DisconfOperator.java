@@ -419,14 +419,12 @@ public class DisconfOperator {
      */
     public List<String> getVersionList(DisconfInfo disconfInfo) throws Exception {
 
-        RequestBody body = new FormBody.Builder()
-                .add("appId", disconfInfo.getAppId())
-                .add("envId", disconfInfo.getEnvId())
-                .build();
+        String baseUrl = disconfInfo.getDisconfHostUrl() + "/api/web/config/versionlist";
+
+        String url = String.format("%s?appId=%s&envId=%s", baseUrl, disconfInfo.getAppId(), disconfInfo.getEnvId());
 
         Request request = new Request.Builder()
-                .url(disconfInfo.getDisconfHostUrl() + "/api/web/config/versionlist")
-                .put(body)
+                .url(url)
                 .get()
                 .build();
 
@@ -499,8 +497,13 @@ public class DisconfOperator {
                 Integer v = list.get(i);
                 String version = versionMap.get(v);
 
+                DisconfInfo info = new DisconfInfo();
+                info.setAppId(disconfInfo.getAppId());
+                info.setEnvId(disconfInfo.getEnvId());
+                info.setVersion(version);
+
                 //删除版本所有配置
-                deleteVersionConfig(disconfInfo, version);
+                deleteVersionConfig(info);
             }
         }
     }
@@ -508,12 +511,11 @@ public class DisconfOperator {
     /**
      * 删除版本所有配置
      * @param disconfInfo
-     * @param version
      * @throws Exception
      */
-    private void deleteVersionConfig(DisconfInfo disconfInfo, String version) throws Exception {
+    private void deleteVersionConfig(DisconfInfo disconfInfo) throws Exception {
 
-        String res = getAllConfigList(disconfInfo.getDisconfHostUrl(), disconfInfo.getAppId(), disconfInfo.getEnvId(), version);
+        String res = getAllConfigList(disconfInfo.getDisconfHostUrl(), disconfInfo.getAppId(), disconfInfo.getEnvId(), disconfInfo.getVersion());
         JSONObject jsonObj = null;
         try {
             jsonObj = getJsonObj(res);
@@ -554,15 +556,13 @@ public class DisconfOperator {
      * @throws Exception
      */
     public String getAllConfigList(String disconfHostUrl, String appId, String envId, String version) throws Exception {
-        RequestBody body = new FormBody.Builder()
-                .add("appId", appId)
-                .add("envId", envId)
-                .add("version", version)
-                .build();
+
+        String baseUrl = disconfHostUrl + "/api/web/config/simple/list";
+
+        String url = String.format("%s?appId=%s&envId=%s&version=%s", baseUrl, appId, envId, version);
 
         Request request = new Request.Builder()
-                .url(disconfHostUrl + "/api/web/config/simple/list")
-                .put(body)
+                .url(url)
                 .get()
                 .build();
 
@@ -612,7 +612,7 @@ public class DisconfOperator {
         if(disconfInfo.getEnableAutoOverride() != null && disconfInfo.getEnableAutoOverride()){
             log.info("自动覆盖配置开启，即将清空配置。");
 
-            this.deleteVersionConfig(disconfInfo, disconfInfo.getVersion());
+            this.deleteVersionConfig(disconfInfo);
         }
     }
 
