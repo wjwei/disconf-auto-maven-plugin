@@ -52,7 +52,7 @@ public class DisconfAutoOperator {
     public static void uploadAppDisconf(String jarDir, String jarName) throws Exception {
         String jarPath = jarDir + "/" + jarName;
 
-        log.info("===========开始上传" + jarName + "应用disconf配置==============");
+        log.info("==============开始上传" + jarName + "应用disconf配置==============");
 
         //读取jar文件的disconf配置流信息
         DisconfFileStream stream = JarFileOperator.getDisconfFileStream(jarPath);
@@ -60,8 +60,8 @@ public class DisconfAutoOperator {
         //获取Disconf信息
         DisconfInfo disconfInfo = DisconfOperator.getDisconfInfo(stream.getDisconfStream());
 
-        if(disconfInfo.getAutoUpload() == null || !disconfInfo.getAutoUpload()){
-            log.info("==============" + jarName + "应用disconf自动上传未开启，上传终止===========");
+        if(disconfInfo.getEnableAutoUpload() == null || !disconfInfo.getEnableAutoUpload()){
+            log.info("==============" + jarName + "应用disconf自动上传未开启，上传终止==============");
             return;
         }
 
@@ -89,6 +89,12 @@ public class DisconfAutoOperator {
         //判断是否清空现有版本的配置
         disconfOperator.clearVersionConfig(disconfInfo);
 
+        //检查是否已经存在配置
+        r = disconfOperator.checkExistConfig(disconfInfo);
+        if(r){
+            log.warn("%s %s %s版本已经存在部分配置", disconfInfo.getApp(), disconfInfo.getEnv(), disconfInfo.getVersion());
+        }
+
         //上传watch配置项
         disconfOperator.uploadDisconfWatchConf(disconfInfo, stream.getWatchFileStream());
 
@@ -98,7 +104,7 @@ public class DisconfAutoOperator {
         //删除老版本的配置
         disconfOperator.deleteOldVersionConfig(disconfInfo);
 
-        log.info("===========" + jarName + "应用disconf自动配置成功==============");
+        log.info("==============" + jarName + "应用disconf自动配置成功==============");
     }
 
 }

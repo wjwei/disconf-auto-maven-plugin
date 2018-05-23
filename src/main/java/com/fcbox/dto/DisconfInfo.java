@@ -21,8 +21,8 @@ public class DisconfInfo {
     private String userName;
     private String userPwd;
 
-    private Boolean autoUpload;
-    private Boolean autoOverride;
+    private Boolean enableAutoUpload;
+    private Boolean enableAutoOverride;
 
     private String appId;
     private String envId;

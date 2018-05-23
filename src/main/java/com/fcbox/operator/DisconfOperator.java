@@ -60,11 +60,11 @@ public class DisconfOperator {
         disconfInfo.setApp(disconf.getProperty("app"));
         disconfInfo.setEnv(disconf.getProperty("env"));
 
-        String autoUpload = disconf.getProperty("auto.upload");
-        disconfInfo.setAutoUpload(StringUtils.isEmpty(autoUpload) ? null : Boolean.valueOf(autoUpload));
+        String enableAutoUpload = disconf.getProperty("enable.auto.upload");
+        disconfInfo.setEnableAutoUpload(StringUtils.isEmpty(enableAutoUpload) ? null : Boolean.valueOf(enableAutoUpload));
 
-        String autoOverride = disconf.getProperty("auto.override");
-        disconfInfo.setAutoOverride(StringUtils.isEmpty(autoOverride) ? null : Boolean.valueOf(autoOverride));
+        String enableAutoOverride = disconf.getProperty("enable.auto.override");
+        disconfInfo.setEnableAutoOverride(StringUtils.isEmpty(enableAutoOverride) ? null : Boolean.valueOf(enableAutoOverride));
 
         String hostUserNamePwd = System.getProperty("disconf.host.user.name.pwd");
         if(!StringUtils.isEmpty(hostUserNamePwd)){
@@ -100,7 +100,7 @@ public class DisconfOperator {
      * @return
      */
     public static void checkDisconfInfo(DisconfInfo disconfInfo){
-        if(StringUtils.isEmpty(disconfInfo.getDisconfHostUrl())){
+        if(StringUtils.isEmpty(disconfInfo.getConfServerHost())){
             throw new RuntimeException("disconf host 为空！");
         }
 
@@ -468,7 +468,6 @@ public class DisconfOperator {
         //获取版本号
         List<String> versionList = getVersionList(disconfInfo);
 
-
         List<Integer> list = new ArrayList<>();
         Map<Integer, String> versionMap = new HashMap<>();
         //版本号转数字
@@ -513,23 +512,8 @@ public class DisconfOperator {
      * @throws Exception
      */
     private void deleteVersionConfig(DisconfInfo disconfInfo, String version) throws Exception {
-        RequestBody body = new FormBody.Builder()
-                .add("appId", disconfInfo.getAppId())
-                .add("envId", disconfInfo.getEnvId())
-                .add("version", version)
-                .build();
 
-        Request request = new Request.Builder()
-                .url(disconfInfo.getDisconfHostUrl() + "/api/web/config/simple/list")
-                .put(body)
-                .get()
-                .build();
-
-        Response response = client.newCall(request).execute();
-
-        String res = response.body().string();
-        response.close();
-
+        String res = getAllConfigList(disconfInfo.getDisconfHostUrl(), disconfInfo.getAppId(), disconfInfo.getEnvId(), version);
         JSONObject jsonObj = null;
         try {
             jsonObj = getJsonObj(res);
@@ -558,6 +542,36 @@ public class DisconfOperator {
         }else{
             throw new RuntimeException(String.format("获取配置列表失败，返回结果：%s", res));
         }
+    }
+
+    /**
+     * 获取所有配置列表
+     * @param disconfHostUrl
+     * @param appId
+     * @param envId
+     * @param version
+     * @return
+     * @throws Exception
+     */
+    public String getAllConfigList(String disconfHostUrl, String appId, String envId, String version) throws Exception {
+        RequestBody body = new FormBody.Builder()
+                .add("appId", appId)
+                .add("envId", envId)
+                .add("version", version)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(disconfHostUrl + "/api/web/config/simple/list")
+                .put(body)
+                .get()
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        String res = response.body().string();
+        response.close();
+
+        return res;
     }
 
     /**
@@ -595,11 +609,35 @@ public class DisconfOperator {
      * @param disconfInfo
      */
     public void clearVersionConfig(DisconfInfo disconfInfo) throws Exception {
-        if(disconfInfo.getAutoOverride() != null && disconfInfo.getAutoOverride()){
+        if(disconfInfo.getEnableAutoOverride() != null && disconfInfo.getEnableAutoOverride()){
             log.info("自动覆盖配置开启，即将清空配置。");
 
             this.deleteVersionConfig(disconfInfo, disconfInfo.getVersion());
         }
+    }
+
+    /**
+     * 检查是否已经存在配置
+     * @param disconfInfo
+     * @return
+     * @throws Exception
+     */
+    public boolean checkExistConfig(DisconfInfo disconfInfo) throws Exception {
+        String res = getAllConfigList(disconfInfo.getDisconfHostUrl(), disconfInfo.getAppId(), disconfInfo.getEnvId(), disconfInfo.getVersion());
+        JSONObject jsonObj = null;
+        try {
+            jsonObj = getJsonObj(res);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("获取配置列表发生异常，返回结果：%s", res), e);
+        }
+
+        if(jsonObj!= null && jsonObj.getBoolean("success")) {
+            JSONArray appArray = jsonObj.getJSONObject("page").getJSONArray("result");
+            if (appArray.size() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
