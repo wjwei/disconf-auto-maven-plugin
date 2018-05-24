@@ -3,7 +3,11 @@
 ## 用途：
 读取jar包或者war包的disconf配置自动上传到disconf。
 
+## 使用
+将插件安装到本地仓库或者发布到maven私服。
+
 ## 引入方式：
+在maven工程中做如下插件引入：
 ```xml
         <plugin>
             <groupId>com.fcbox</groupId>
@@ -43,7 +47,7 @@ enable.auto.override=true
 ## disconf文件存放要求
 disconf文件、或者配置项必须以如下结构存放
 
-```
+```java
 -src
   -main
     -resources
@@ -60,14 +64,16 @@ disconf文件、或者配置项必须以如下结构存放
           -online
             watchConfFile.properties
             sysConfig.properties
-            redisConfig.properties
-            
-```          
+            redisConfig.properties
+```
+
 其中   -disconf
           -rd
           -qa
           -online
-这个目录结构是不能改变的因为插件是按照这个目录结构加载配置的，disconf文件夹名称不能变，下面的环境（rd、qa、online）文件夹可根据你的环境名称而变，watch配置项的watchConfFile.properties文件名称是不能改变的，插件是到这个名称的文件中加载disconf的watche配置项的。 
+这个目录结构是不能改变的因为插件是按照这个目录结构加载配置的，disconf文件夹名称不能变，
+下面的环境（rd、qa、online）文件夹可根据你的环境名称而变，watch配置项的watchConfFile.properties文件名称是不能改变的，
+插件是到这个名称的文件中加载disconf的watche配置项的。 
 
 ## 运行
 运行disconf-auto-maven-plugin插件即可自动上传配置。
