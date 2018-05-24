@@ -1,4 +1,4 @@
-### disconf-auto-maven-plugin是一个maven插件，配合disconf使用。
+## disconf-auto-maven-plugin是一个maven插件，配合disconf使用。
 
 ## 用途
 读取jar包或者war包的disconf配置自动上传到disconf。
