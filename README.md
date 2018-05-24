@@ -43,6 +43,7 @@ enable.auto.override=true
 
 如果不同环境有对应不同的disconf控制台，则配置多个，插件会自动识别当前环境对应哪个disconf控制台账号密码。
 如果不设置则账号密码都默认为admin
+hostNamePwd的组成是：disconf控制台访问IP或域名 @ 用户名 ：密码
 
 ## disconf文件存放要求
 disconf文件、或者配置项必须以如下结构存放
