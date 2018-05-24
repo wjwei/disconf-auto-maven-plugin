@@ -69,10 +69,13 @@ disconf文件、或者配置项必须以如下结构存放
             redisConfig.properties
 ```
 
-其中   -disconf
-          -rd
-          -qa
-          -online
+其中   
+```
+ -disconf
+    -rd
+    -qa
+    -online
+```
 这个目录结构是不能改变的因为插件是按照这个目录结构加载配置的，disconf文件夹名称不能变，
 下面的环境（rd、qa、online）文件夹可根据你的环境名称而变，watch配置项的watchConfFile.properties文件名称是不能改变的，
 插件是到这个名称的文件中加载disconf的watche配置项的。 
