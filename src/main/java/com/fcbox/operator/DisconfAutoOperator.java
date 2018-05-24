@@ -4,7 +4,8 @@ import com.fcbox.dto.DisconfAutoConfig;
 import com.fcbox.dto.DisconfFileStream;
 import com.fcbox.dto.DisconfInfo;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+
+import java.util.List;
 
 /**
  * @author 000298
@@ -49,7 +50,7 @@ public class DisconfAutoOperator {
      * @param jarName
      * @throws Exception
      */
-    public static void uploadAppDisconf(String jarDir, String jarName) throws Exception {
+    public static void uploadAppDisconf(String jarDir, String jarName, List<String> hostNamePwdList) throws Exception {
         String jarPath = jarDir + "/" + jarName;
 
         log.info("==============开始上传" + jarName + "应用disconf配置==============");
@@ -59,6 +60,9 @@ public class DisconfAutoOperator {
 
         //获取Disconf信息
         DisconfInfo disconfInfo = DisconfOperator.getDisconfInfo(stream.getDisconfStream());
+
+        //设置Disconf用户名密码信息
+        DisconfOperator.setDisconfUserNamePwd(disconfInfo, hostNamePwdList);
 
         if(disconfInfo.getEnableAutoUpload() == null || !disconfInfo.getEnableAutoUpload()){
             log.info("==============" + jarName + "应用disconf自动上传未开启，上传终止==============");

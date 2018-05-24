@@ -57,17 +57,11 @@ public class DisconfAutoPlugin extends AbstractMojo {
 
         String jarPath = String.format("%s/%s.%s", buildDir, finalName, packing);
 
-        if(hostNamePwdList != null && hostNamePwdList.size() > 0){
-            for(String hostNamePwd : hostNamePwdList){
-                getLog().info("hostNamePwd:" + hostNamePwd);
-            }
-        }
-
         getLog().info("jarPath : " + jarPath);
 
         try {
             //上传应用的disconf配置
-            DisconfAutoOperator.uploadAppDisconf(buildDir, fileName);
+            DisconfAutoOperator.uploadAppDisconf(buildDir, fileName, hostNamePwdList);
         } catch (Exception e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
