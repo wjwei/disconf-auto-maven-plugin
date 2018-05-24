@@ -1,12 +1,12 @@
 ### disconf-auto-maven-plugin是一个maven插件，配合disconf使用。
 
-## 用途：
+## 用途
 读取jar包或者war包的disconf配置自动上传到disconf。
 
 ## 使用
 将插件安装到本地仓库或者发布到maven私服。
 
-## 引入方式：
+## 引入方式
 在maven工程中做如下插件引入：
 ```xml
         <plugin>
@@ -16,7 +16,7 @@
         </plugin>
 ```
 
-## 配置：
+## 配置
 ```properties
 #是否开启自动上传（true、false）
 enable.auto.upload=true
@@ -26,7 +26,7 @@ enable.auto.override=true
 
 在disconf.properties文件中进行配置。
 
-## 配置disconf控制台的用户名密码：
+## 配置disconf控制台的用户名密码
 ```xml
         <plugin>
             <groupId>com.fcbox</groupId>
