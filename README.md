@@ -40,5 +40,34 @@ enable.auto.override=true
 如果不同环境有对应不同的disconf控制台，则配置多个，插件会自动识别当前环境对应哪个disconf控制台账号密码。
 如果不设置则账号密码都默认为admin
 
+## disconf文件存放要求
+disconf文件、或者配置项必须以如下结构存放
+
+```
+-src
+  -main
+    -resources
+      -config
+        -disconf
+          -rd
+            watchConfFile.properties
+            sysConfig.properties
+            redisConfig.properties
+          -qa
+            watchConfFile.properties
+            sysConfig.properties
+            redisConfig.properties
+          -online
+            watchConfFile.properties
+            sysConfig.properties
+            redisConfig.properties
+            
+```          
+其中   -disconf
+          -rd
+          -qa
+          -online
+这个目录结构是不能改变的因为插件是按照这个目录结构加载配置的，disconf文件夹名称不能变，下面的环境（rd、qa、online）文件夹可根据你的环境名称而变，watch配置项的watchConfFile.properties文件名称是不能改变的，插件是到这个名称的文件中加载disconf的watche配置项的。 
+
 ## 运行
 运行disconf-auto-maven-plugin插件即可自动上传配置。
