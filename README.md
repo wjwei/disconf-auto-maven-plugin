@@ -82,3 +82,8 @@ disconf文件、或者配置项必须以如下结构存放
 
 ## 运行
 运行disconf-auto-maven-plugin插件即可自动上传配置。
+
+```manven
+mvn disconf-auto:upload
+```
+
