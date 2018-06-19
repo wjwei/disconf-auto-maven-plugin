@@ -34,8 +34,8 @@ enable.auto.override=true
             <version>1.0</version>
             <configuration>
                 <hostNamePwdList>
-                    <hostNamePwd>10.207.33.25@admin:admin</hostNamePwd>
-                    <hostNamePwd>10.207.33.55@guest:123456</hostNamePwd>
+                    <hostNamePwd>10.207.56.25@admin:admin</hostNamePwd>
+                    <hostNamePwd>10.207.56.55@guest:123456</hostNamePwd>
                 </hostNamePwdList>
             </configuration>
         </plugin>
