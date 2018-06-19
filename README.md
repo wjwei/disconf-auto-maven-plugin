@@ -29,7 +29,7 @@ enable.auto.override=true
 ## 配置disconf控制台的用户名密码
 ```xml
         <plugin>
-            <groupId>com.fcbox</groupId>
+            <groupId>com.wjwei</groupId>
             <artifactId>disconf-auto-maven-plugin</artifactId>
             <version>1.0</version>
             <configuration>
