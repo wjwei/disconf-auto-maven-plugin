@@ -10,7 +10,7 @@
 在maven工程中做如下插件引入：
 ```xml
         <plugin>
-            <groupId>com.fcbox</groupId>
+            <groupId>com.wjwei</groupId>
             <artifactId>disconf-auto-maven-plugin</artifactId>
             <version>1.0</version>
         </plugin>
