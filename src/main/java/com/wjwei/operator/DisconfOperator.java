@@ -1,10 +1,10 @@
-package com.fcbox.operator;
+package com.wjwei.operator;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.fcbox.dto.DisconfInfo;
-import com.fcbox.dto.FileStream;
+import com.wjwei.dto.DisconfInfo;
+import com.wjwei.dto.FileStream;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.apache.commons.io.IOUtils;

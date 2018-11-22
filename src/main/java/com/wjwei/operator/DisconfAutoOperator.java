@@ -1,8 +1,8 @@
-package com.fcbox.operator;
+package com.wjwei.operator;
 
-import com.fcbox.dto.DisconfAutoConfig;
-import com.fcbox.dto.DisconfFileStream;
-import com.fcbox.dto.DisconfInfo;
+import com.wjwei.dto.DisconfAutoConfig;
+import com.wjwei.dto.DisconfFileStream;
+import com.wjwei.dto.DisconfInfo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;

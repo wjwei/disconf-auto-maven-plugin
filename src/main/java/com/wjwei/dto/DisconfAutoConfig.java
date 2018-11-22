@@ -1,4 +1,4 @@
-package com.fcbox.dto;
+package com.wjwei.dto;
 
 import lombok.Getter;
 import lombok.Setter;

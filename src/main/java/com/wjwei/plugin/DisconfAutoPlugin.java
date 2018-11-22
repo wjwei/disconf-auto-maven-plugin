@@ -1,6 +1,6 @@
-package com.fcbox.plugin;
+package com.wjwei.plugin;
 
-import com.fcbox.operator.DisconfAutoOperator;
+import com.wjwei.operator.DisconfAutoOperator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
