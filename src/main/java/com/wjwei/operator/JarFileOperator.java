@@ -36,7 +36,7 @@ public class JarFileOperator {
         while(entries.hasMoreElements()){
             JarEntry element = entries.nextElement();
             String elementName = element.getName();
-            if(elementName.endsWith("disconf.properties")){
+            if(elementName.endsWith("application.properties")){
                 disconfEntry = element;
             }
             if(elementName.contains("/disconf/") && elementName.endsWith("watchConfFile.properties")){
