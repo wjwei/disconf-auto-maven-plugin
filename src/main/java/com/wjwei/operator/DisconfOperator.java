@@ -54,16 +54,16 @@ public class DisconfOperator {
         disconf.load(disconfStream);
 
         DisconfInfo disconfInfo = new DisconfInfo();
-        disconfInfo.setConfServerHost(disconf.getProperty("conf_server_host"));
-        disconfInfo.setDisconfHostUrl("http://" + disconf.getProperty("conf_server_host"));
-        disconfInfo.setVersion(disconf.getProperty("version"));
-        disconfInfo.setApp(disconf.getProperty("app"));
-        disconfInfo.setEnv(disconf.getProperty("env"));
+        disconfInfo.setConfServerHost(disconf.getProperty("disconf.conf_server_host"));
+        disconfInfo.setDisconfHostUrl("http://" + disconf.getProperty("disconf.conf_server_host"));
+        disconfInfo.setVersion(disconf.getProperty("disconf.version"));
+        disconfInfo.setApp(disconf.getProperty("disconf.app"));
+        disconfInfo.setEnv(disconf.getProperty("disconf.env"));
 
-        String enableAutoUpload = disconf.getProperty("enable.auto.upload");
+        String enableAutoUpload = disconf.getProperty("disconf.enable.auto.upload");
         disconfInfo.setEnableAutoUpload(StringUtils.isEmpty(enableAutoUpload) ? null : Boolean.valueOf(enableAutoUpload));
 
-        String enableAutoOverride = disconf.getProperty("enable.auto.override");
+        String enableAutoOverride = disconf.getProperty("disconf.enable.auto.override");
         disconfInfo.setEnableAutoOverride(StringUtils.isEmpty(enableAutoOverride) ? null : Boolean.valueOf(enableAutoOverride));
 
         return disconfInfo;
