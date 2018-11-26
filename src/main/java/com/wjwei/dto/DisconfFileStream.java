@@ -15,7 +15,7 @@ import java.util.List;
 public class DisconfFileStream {
 
     /**
-     * disconf.properties文件流
+     * application.properties文件流
      */
     private InputStream disconfStream;
 

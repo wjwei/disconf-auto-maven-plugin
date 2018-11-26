@@ -24,7 +24,7 @@ enable.auto.upload=true
 enable.auto.override=true
 ```
 
-在disconf.properties文件中进行配置。
+在application.properties文件中进行配置。
 
 ## 配置disconf控制台的用户名密码
 ```xml

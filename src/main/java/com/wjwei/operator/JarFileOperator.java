@@ -45,7 +45,7 @@ public class JarFileOperator {
         }
 
         if(disconfEntry == null){
-            throw new RuntimeException("未找到disconf.properties文件！");
+            throw new RuntimeException("未找到application.properties文件！");
         }
         InputStream disconfStream = jar.getInputStream(disconfEntry);
 
