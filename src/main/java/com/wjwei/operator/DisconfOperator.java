@@ -366,7 +366,7 @@ public class DisconfOperator {
                     throw new RuntimeException(String.format("上传watch配置项失败，key:%s, value:%s，返回结果：%s", name, value, res));
                 }
 
-                log.info(String.format("上传watch配置项成功，app:%s env:%s version:%s key:%s, value:%s",
+                log.info(String.format("上传watch配置项成功，%s %s %s key:%s, value:%s",
                         disconfInfo.getApp(),
                         disconfInfo.getEnv(),
                         disconfInfo.getVersion(),
@@ -422,7 +422,7 @@ public class DisconfOperator {
                 throw new RuntimeException(String.format("上传普通配置文件失败，fileName:%s，返回结果：%s", fileName, res));
             }
 
-            log.info(String.format("上传普通配置文件成功，app:%s env:%s version:%s fileName:%s",
+            log.info(String.format("上传普通配置文件成功，%s %s %s fileName:%s",
                     disconfInfo.getApp(),
                     disconfInfo.getEnv(),
                     disconfInfo.getVersion(),
@@ -555,7 +555,7 @@ public class DisconfOperator {
                     //删除配置
                     this.deleteConfig(disconfInfo, configId);
 
-                    log.info(String.format("成功删除配置！app:%s env:%s version:%s key:%s configId:%s",
+                    log.info(String.format("成功删除配置！%s %s %s key:%s configId:%s",
                             obj.getString("appName"),
                             obj.getString("envName"),
                             obj.getString("version"),
